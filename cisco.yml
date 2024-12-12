@@ -33,5 +33,8 @@ topology:
 
   links:
     - endpoints: ["iol-1:Ethernet0/1","iol-3:Ethernet0/1"]
+      mtu: 1500
     - endpoints: ["PC1:eth1","iol-3:Ethernet0/2"]
+      mtu: 1500
     - endpoints: ["PC2:eth1","iol-3:Ethernet0/3"]
+      mtu: 1500
