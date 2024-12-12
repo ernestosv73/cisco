@@ -7,19 +7,32 @@ name: ipv6cisco
 
 topology:
   nodes:
+    
     iol-1:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
       #mgmt-ipv4: 192.168.100.31
-    iol-2:
-      kind: cisco_iol
-      image: vrnetlab/cisco_iol:17.12.01
-      #mgmt-ipv4: 192.168.100.32
+    
+       
     iol-3:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:l2-17.12.01
       type: l2
       #mgmt-ipv4: 192.168.100.40
+    
+    PC1:
+      kind: linux
+      image: docker.io/esanchezv/kaliipv6v2.1:latest
+      exec:
+      - ip -6 route del default dev eth0
+
+    PC2:
+      kind: linux
+      image: docker.io/esanchezv/kaliipv6v2.1:latest
+      exec:
+      - ip -6 route del default dev eth0    
 
   links:
-    - endpoints: ["iol-1:Ethernet0/1","iol-2:Ethernet0/1"] 
+    - endpoints: ["iol-1:Ethernet0/1","iol-3:Ethernet0/1"]
+    - endpoints: ["PC1:eth1","iol-3:Ethernet0/2"]
+    - endpoints: ["PC2:eth1","iol-3:Ethernet0/3"]
