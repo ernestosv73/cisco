@@ -10,7 +10,9 @@ topology:
     iol-1:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
-      startup-config: router/startup.cfg
+      binds:
+        - router/startup.cfg:/config/startup-config.cfg
+      
     
        
     iol-3:
