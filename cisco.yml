@@ -1,8 +1,8 @@
 name: ipv6cisco
 
-mgmt:
-  network: mgmt
-  ipv4-subnet: 192.168.100.0/24
+#mgmt:
+  #network: mgmt
+  #ipv4-subnet: 192.168.100.0/24
 
 topology:
   nodes:
@@ -10,7 +10,6 @@ topology:
     iol-1:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
-      mgmt-ipv4: 192.168.100.31
       startup-config: router/startup.cfg
           
        
@@ -19,19 +18,16 @@ topology:
       image: vrnetlab/cisco_iol:l2-17.12.01
       type: l2
       startup-config: switch/startup.cfg
-      mgmt-ipv4: 192.168.100.32
-    
+          
     PC1:
       kind: linux
       image: docker.io/esanchezv/kaliipv6v2.1:latest
-      mgmt-ipv4: 192.168.100.33
       exec:
       - ip -6 route del default dev eth0
 
     PC2:
       kind: linux
       image: docker.io/esanchezv/kaliipv6v2.1:latest
-      mgmt-ipv4: 192.168.100.34
       exec:
       - ip -6 route del default dev eth0    
 
