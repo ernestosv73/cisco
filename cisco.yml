@@ -10,14 +10,14 @@ topology:
     iol-1:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
-      #startup-config: router/startup.cfg
+      startup-config: router/config.txt
     
        
     iol-3:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:l2-17.12.01
       type: l2
-      startup-config: switch/config.txt
+      startup-config: switch/startup.cfg
     
     PC1:
       kind: linux
