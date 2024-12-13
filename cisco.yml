@@ -26,12 +26,14 @@ topology:
     PC1:
       kind: linux
       image: docker.io/esanchezv/kaliipv6v2.1:latest
+      mgmt-ipv4: 192.168.100.33
       exec:
       - ip -6 route del default dev eth0
 
     PC2:
       kind: linux
       image: docker.io/esanchezv/kaliipv6v2.1:latest
+      mgmt-ipv4: 192.168.100.34
       exec:
       - ip -6 route del default dev eth0    
 
