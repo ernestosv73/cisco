@@ -1,8 +1,8 @@
 name: ipv6cisco
 
-#mgmt:
-#  network: mgmt
-#  ipv4-subnet: 192.168.100.0/24
+mgmt:
+  network: mgmt
+  ipv4-subnet: 192.168.100.0/24
 
 topology:
   nodes:
@@ -10,9 +10,10 @@ topology:
     iol-1:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
+      mgmt-ipv4: 192.168.100.31
       #startup-config: router/config.txt
-      binds:
-        - ./router/config.txt:/iol/config.txt
+      #binds:
+      #  - ./router/config.txt:/iol/config.txt
     
        
     iol-3:
@@ -20,6 +21,7 @@ topology:
       image: vrnetlab/cisco_iol:l2-17.12.01
       type: l2
       startup-config: switch/startup.cfg
+      mgmt-ipv4: 192.168.100.32
     
     PC1:
       kind: linux
