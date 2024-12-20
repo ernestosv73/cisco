@@ -1,11 +1,25 @@
 name: ipv6cisco
 
-#mgmt:
-  #network: mgmt
-  #ipv4-subnet: 192.168.100.0/24
+mgmt:
+  network: mgmt
+  ipv4-subnet: 192.168.100.0/24
 
 topology:
   nodes:
+
+    # Nokia SRL Linux funcionando como dispositivo de capa 2
+    srl1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.10.1
+      type: ixrd3
+      startup-config: srlsw/config.json
+
+    # Nokia SRL Linux funcionando como dispositivo de capa 2
+    srl2:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.10.1
+      type: ixrd3
+      startup-config: srlsw/config.json
     
     iol-1:
       kind: cisco_iol
@@ -21,30 +35,40 @@ topology:
           
     PC1:
       kind: linux
-      image: docker.io/esanchezv/kaliipv6v2.1:latest
+      image: esanchezv/kaliipv6v2.2:latest
       exec:
       - ip -6 route del default dev eth0
 
     PC2:
       kind: linux
-      image: docker.io/esanchezv/kaliipv6v2.1:latest
+      image: esanchezv/kaliipv6v2.2:latest
       exec:
       - ip -6 route del default dev eth0    
 
     PC3:
       kind: linux
-      image: esanchezv/ndpmon2.2:latest
+      image: esanchezv/kaliipv6v2.2:latest
       exec:
       - ip -6 route del default dev eth0
-      ports: 
-      - 8080:80/tcp
-
+    
+    PC4:
+      kind: linux
+      image: esanchezv/kaliipv6v2.2:latest
+      exec:
+      - ip -6 route del default dev eth0  
+      
   links:
     - endpoints: ["iol-1:Ethernet0/1","iol-3:Ethernet0/1"]
       mtu: 1500
-    - endpoints: ["PC1:eth1","iol-3:Ethernet0/2"]
-      mtu: 1500
-    - endpoints: ["PC2:eth1","iol-3:Ethernet0/3"]
-      mtu: 1500
-    - endpoints: ["PC3:eth1","iol-3:Ethernet1/0"]
+    - endpoints: ["iol-3:Ethernet0/2","srl1:e1-1"]
       mtu: 1500  
+    - endpoints: ["iol-3:Ethernet0/3","srl2:e1-1"]
+      mtu: 1500
+    - endpoints: ["PC1:eth1","srl1:e1-2"]
+      mtu: 1500
+    - endpoints: ["PC2:eth1","srl1:e1-3"]
+      mtu: 1500
+    - endpoints: ["PC3:eth1","srl2:e1-2"]
+      mtu: 1500  
+    - endpoints: ["PC4:eth1","srl2:e1-3"]
+      mtu: 1500    
