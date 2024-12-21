@@ -38,6 +38,8 @@ topology:
       image: esanchezv/kaliipv6v2.2:latest
       exec:
       - ip -6 route del default dev eth0
+      - ip link add name eth1.10 link eth1 type vlan id 10
+      - ip link set dev eth1.10 up
 
     PC2:
       kind: linux
