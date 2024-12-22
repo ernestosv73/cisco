@@ -1,8 +1,8 @@
 name: ipv6cisco
 
-mgmt:
-  network: mgmt
-  ipv4-subnet: 192.168.100.0/24
+#mgmt:
+  #network: mgmt
+  #ipv4-subnet: 192.168.100.0/24
 
 topology:
   nodes:
@@ -11,15 +11,15 @@ topology:
     srl1:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.10.1
-      type: ixrd3
-      startup-config: srlsw/config.json
+      #type: ixrd3
+      #startup-config: srlsw/config.json
 
     # Nokia SRL Linux funcionando como dispositivo de capa 2
     srl2:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.10.1
-      type: ixrd3
-      startup-config: srlsw/config.json
+      #type: ixrd3
+      #startup-config: srlsw/config.json
     
     iol-1:
       kind: cisco_iol
