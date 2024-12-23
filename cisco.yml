@@ -24,12 +24,16 @@ topology:
     iol-1:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
+      exec:
+      - ip -6 route del default dev eth0
       
                  
     iol-3:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:l2-17.12.01
       type: l2
+      exec:
+      - ip -6 route del default dev eth0
                 
     PC1:
       kind: linux
