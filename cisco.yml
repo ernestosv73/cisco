@@ -67,13 +67,13 @@ topology:
     - endpoints: ["iol-1:Ethernet0/1","iol-3:Ethernet0/1"]
       #mtu: 1500
     #VLAN 20 router
-    #- endpoints: ["iol-1:Ethernet0/2","iol-3:Ethernet0/2"]
+    - endpoints: ["iol-1:Ethernet0/2","iol-3:Ethernet0/2"]
       #mtu: 1500  
     #VLAN 10 switch Nokia srl1
-    - endpoints: ["iol-3:Ethernet0/2","srl1:e1-1"]
+    - endpoints: ["iol-3:Ethernet0/3","srl1:e1-1"]
       #mtu: 1500
     #VLAN 20 switch Nokia srl1 
-    - endpoints: ["iol-3:Ethernet0/3","srl1:e1-2"]
+    - endpoints: ["iol-3:Ethernet1/0","srl1:e1-2"]
       #mtu: 1500
     #VLAN 10 switch Nokia srl2
     #- endpoints: ["iol-3:Ethernet1/1","srl2:e1-1"]
