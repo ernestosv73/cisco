@@ -41,7 +41,7 @@ topology:
 
     PC2:
       kind: linux
-      image: esanchezv/kaliipv6v2.2:latest
+      image: wbitt/network-multitool:extra
       exec:
       #- ip -6 route del default dev eth0    
       - ip link add name eth1.20 link eth1 type vlan id 20
@@ -56,7 +56,7 @@ topology:
       
     PC4:
       kind: linux
-      image: esanchezv/kaliipv6v2.2:latest
+      image: wbitt/network-multitool:extra
       exec:
       #- ip -6 route del default dev eth0
       - ip link add name eth1.20 link eth1 type vlan id 20
@@ -87,5 +87,5 @@ topology:
       mtu: 1500
     - endpoints: ["PC3:eth1","srl1:e1-5"]
       mtu: 1500  
-    - endpoints: ["PC4:eth1","srl2:e1-3"]
+    - endpoints: ["PC4:eth1","srl2:e1-4"]
       mtu: 1500    
