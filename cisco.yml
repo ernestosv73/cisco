@@ -64,28 +64,28 @@ topology:
       
   links:
     #VLAN 10 router
-    - endpoints: ["iol-1:Ethernet0/1","iol-3:Ethernet0/1"]
+    #- endpoints: ["iol-1:Ethernet0/1","iol-3:Ethernet0/1"]
       #mtu: 1500
     #VLAN 20 router
-    - endpoints: ["iol-1:Ethernet0/2","iol-3:Ethernet0/2"]
+    #- endpoints: ["iol-1:Ethernet0/2","iol-3:Ethernet0/2"]
       #mtu: 1500  
     #VLAN 10 switch Nokia srl1
-    - endpoints: ["iol-3:Ethernet0/3","srl1:e1-1"]
+    - endpoints: ["iol-3:Ethernet0/1","srl1:e1-1"]
       #mtu: 1500
     #VLAN 20 switch Nokia srl1 
-    - endpoints: ["iol-3:Ethernet1/0","srl1:e1-2"]
+    - endpoints: ["iol-3:Ethernet0/2","srl1:e1-2"]
       #mtu: 1500
     #VLAN 10 switch Nokia srl2
-    #- endpoints: ["iol-3:Ethernet1/1","srl2:e1-1"]
+    - endpoints: ["iol-3:Ethernet0/3","srl2:e1-1"]
       #mtu: 1500
     #VLAN 20 switch Nokia srl2 
-    #- endpoints: ["iol-3:Ethernet1/2","srl2:e1-2"]
+    - endpoints: ["iol-3:Ethernet1/0","srl2:e1-2"]
       #mtu: 1500  
     - endpoints: ["PC1:eth1","srl1:e1-3"]
       mtu: 1500
     - endpoints: ["PC2:eth1","srl1:e1-4"]
       mtu: 1500
-    - endpoints: ["PC3:eth1","srl2:e1-3"]
+    - endpoints: ["PC3:eth1","srl1:e1-5"]
       mtu: 1500  
-    - endpoints: ["PC4:eth1","srl2:e1-4"]
+    - endpoints: ["PC4:eth1","srl2:e1-3"]
       mtu: 1500    
