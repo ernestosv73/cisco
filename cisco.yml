@@ -6,86 +6,60 @@ mgmt:
 
 topology:
   nodes:
-
-    # Nokia SRL Linux funcionando como dispositivo de capa 2
-    srl1:
-      kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux:24.10.1
-      #type: ixrd3
-      startup-config: srlsw/config.json
-
-    # Nokia SRL Linux funcionando como dispositivo de capa 2
-    srl2:
-      kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux:24.10.1
-      #type: ixrd3
-      startup-config: srlsw/config.json
+ 
     
-    iol-1:
+    ciscorouter:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
-           
+
+    arubaaccess:
+      kind: aruba_aoscx 
+      image: vrnetlab/aruba_arubaos-cx:20210610000730
+      startup-config: cfgaccess.txt       
                  
-    iol-3:
-      kind: cisco_iol
-      image: vrnetlab/cisco_iol:l2-17.12.01
-      type: l2
-                      
     PC1:
       kind: linux
-      image: esanchezv/kaliipv6v2.2:latest
+      image: docker.io/esanchezv/kaliipv6:latest
       exec:
-      #- ip -6 route del default dev eth0
-      - ip link add name eth1.10 link eth1 type vlan id 10
-      - ip link set dev eth1.10 up
-
+      - ip -6 route del default dev eth0
+      
     PC2:
       kind: linux
-      image: wbitt/network-multitool:extra
+      image: ghcr.io/hellt/network-multitool
+      binds:
+       - config/client.sh:/root/client.sh
       exec:
-      #- ip -6 route del default dev eth0    
-      - ip link add name eth1.20 link eth1 type vlan id 20
-      - ip link set dev eth1.20 up
+      - ip -6 route del default dev eth0
+      - chmod +x /root/client.sh
+      - bash /root/client.sh
+      
     PC3:
       kind: linux
-      image: esanchezv/kaliipv6v2.2:latest
+      image: docker.io/esanchezv/kaliipv6:latest
       exec:
-      #- ip -6 route del default dev eth0
-      - ip link add name eth1.10 link eth1 type vlan id 10
-      - ip link set dev eth1.10 up
-      
+      - ip -6 route del default dev eth0
+            
     PC4:
       kind: linux
-      image: wbitt/network-multitool:extra
+      image: ghcr.io/hellt/network-multitool
+      binds:
+       - config/client.sh:/root/client.sh
       exec:
-      #- ip -6 route del default dev eth0
-      - ip link add name eth1.20 link eth1 type vlan id 20
-      - ip link set dev eth1.20 up
+      - ip -6 route del default dev eth0
+      - chmod +x /root/client.sh
+      - bash /root/client.sh
       
+           
   links:
-    #VLAN 10 router
-    #- endpoints: ["iol-1:Ethernet0/1","iol-3:Ethernet0/1"]
+    #- endpoints: ["arubacore:eth2","srvweb:eth1"]
       #mtu: 1500
-    #VLAN 20 router
-    #- endpoints: ["iol-1:Ethernet0/2","iol-3:Ethernet0/2"]
-      #mtu: 1500  
-    #VLAN 10 switch Nokia srl1
-    - endpoints: ["iol-3:Ethernet0/1","srl1:e1-1"]
-      #mtu: 1500
-    #VLAN 20 switch Nokia srl1 
-    - endpoints: ["iol-3:Ethernet0/2","srl1:e1-2"]
-      #mtu: 1500
-    #VLAN 10 switch Nokia srl2
-    - endpoints: ["iol-3:Ethernet0/3","srl2:e1-1"]
-      #mtu: 1500
-    #VLAN 20 switch Nokia srl2 
-    - endpoints: ["iol-3:Ethernet1/0","srl2:e1-2"]
-      #mtu: 1500  
-    - endpoints: ["PC1:eth1","srl1:e1-3"]
-      #mtu: 1500
-    - endpoints: ["PC2:eth1","srl1:e1-4"]
-      #mtu: 1500
-    - endpoints: ["PC3:eth1","srl1:e1-5"]
-      #mtu: 1500  
-    - endpoints: ["PC4:eth1","srl2:e1-4"]
-      #mtu: 1500    
+    - endpoints: ["ciscorouter:eth1","arubaaccess:eth1"]
+      mtu: 1500
+    - endpoints: ["arubaaccess:eth2","PC1:eth1"]
+      mtu: 1500
+    - endpoints: ["arubaaccess:eth3","PC2:eth1"]
+      mtu: 1500
+    - endpoints: ["arubaaccess:eth4","PC3:eth1"]
+      mtu: 1500
+    - endpoints: ["arubaaccess:eth5","PC4:eth1"]
+      mtu: 1500
