@@ -53,7 +53,7 @@ topology:
   links:
     #- endpoints: ["arubacore:eth2","srvweb:eth1"]
       #mtu: 1500
-    - endpoints: ["ciscorouter:eth1","arubaaccess:eth1"]
+    - endpoints: ["ciscorouter:Ethernet0/1","arubaaccess:eth1"]
       mtu: 1500
     - endpoints: ["arubaaccess:eth2","PC1:eth1"]
       mtu: 1500
