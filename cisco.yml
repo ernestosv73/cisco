@@ -11,6 +11,7 @@ topology:
     ciscorouter:
       kind: cisco_iol
       image: vrnetlab/cisco_iol:17.12.01
+      startup-config: config.partial
 
     arubaaccess:
       kind: aruba_aoscx 
