@@ -6,6 +6,7 @@ ipv6 address 2001:db8:20::2/64
 exit
 interface 1/1/1
 no routing
+vlan trunk native 20
 no shutdown
 exit
 interface 1/1/2
